@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import path from "path"
 import fileUpload from "express-fileupload"
-import puppeteer from "puppeteer"
+import puppeteer from "puppeteer-core"
 import ejs from "ejs"
 import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
@@ -66,7 +66,11 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
       footer
     });
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
+      args: chrome.args,
+    });
     const page = await browser.newPage();
     await page.setContent(html);
 
@@ -78,7 +82,7 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
 
     await browser.close();
 
-    await cloudinary.uploader.destroy(result.public_id);
+    if (result) await cloudinary.uploader.destroy(result.public_id);
 
     res.send(Buffer.from(screenshot));
   } catch (error) {
