@@ -89,5 +89,5 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
 })
 
 app.listen(process.env.PORT, () => {
-  console.log(`Listening to port: ${PORT}`);
+  console.log(`Listening to port: ${process.env.PORT}`);
 })
