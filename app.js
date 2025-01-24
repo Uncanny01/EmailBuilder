@@ -66,11 +66,7 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
       footer
     });
 
-    const browser = await puppeteer.launch({
-      executablePath: await chrome.executablePath,
-      headless: chrome.headless,
-      args: chrome.args,
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setContent(html);
 
