@@ -9,15 +9,13 @@ import { v2 as cloudinary } from "cloudinary"
 
 const app = express();
 
-const PORT = 8080;
-
 app.set('view engine', 'ejs');
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 app.set('views', path.join(__dirname, 'views'));
 dotenv.config()
 
 app.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: ["https://gleaming-cobbler-62e4d6.netlify.app"],
   methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true,
 }));
@@ -90,6 +88,6 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
 
 })
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Listening to port: ${PORT}`);
 })
