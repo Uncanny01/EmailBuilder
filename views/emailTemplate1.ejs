@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Email Template</title>
+    <style>
+        .email-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .email-content {
+            width: 100%;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .email-footer {
+            width: 100%;
+        }
+        img {
+            max-width: 100%;
+            max-height: 400px;
+        }
+
+        div {
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: center;
+            resize: vertical;
+        }
+
+        div:focus {
+            outline: none;
+        }
+
+        .email-footer div {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .email-content div {
+            font-size: 18px;
+        }
+        .heading {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        #image{
+            border-radius: 5px;
+        }
+        #image:hover{
+            cursor: pointer;
+        }
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div contenteditable="true" name="title" class="heading"><%= title %></div>
+
+        <div class="email-content">
+            <div contenteditable="true" name="content"><%= content %></div>
+            <img src="<%= imageUrl %>" alt="Image" name="imageUrl" id="image">
+        </div>
+        <div class="email-footer">
+            <div contenteditable="true" name="footer"><%= footer %></div>
+        </div>
+    </div>
+</body>
+</html>
