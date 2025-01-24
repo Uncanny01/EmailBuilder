@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 dotenv.config()
 
 app.use(cors({
-  origin: ["https://gleaming-cobbler-62e4d6.netlify.app"],
+  origin: [process.env.FRONTEND_URL],
   methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true,
 }));
