@@ -3,13 +3,14 @@ import cors from "cors"
 import path from "path"
 import fileUpload from "express-fileupload"
 import puppeteer from 'puppeteer-extra';
-import { executablePath } from 'chrome-aws-lambda';
+import chromeLambda from 'chrome-aws-lambda';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import ejs from "ejs"
 import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
 
 const app = express();
+const { executablePath } = chromeLambda;
 
 app.set('view engine', 'ejs');
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
