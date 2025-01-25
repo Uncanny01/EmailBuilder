@@ -2,9 +2,7 @@ import express from "express"
 import cors from "cors"
 import path from "path"
 import fileUpload from "express-fileupload"
-import puppeteer from 'puppeteer-extra';
-import chromeLambda from 'chrome-aws-lambda';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import puppeteer from "puppeteer"
 import ejs from "ejs"
 import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
@@ -18,10 +16,10 @@ dotenv.config()
 
 app.use(cors({
   origin: [process.env.FRONTEND_URL],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true,
 }));
-puppeteer.use(StealthPlugin());
+
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -68,11 +66,7 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
       footer
     });
 
-    const browser = await puppeteer.launch({
-      executablePath: chromeLambda.executablePath,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      headless: true,
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setContent(html);
 
