@@ -10,7 +10,6 @@ import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
 
 const app = express();
-const { executablePath } = chromeLambda;
 
 app.set('view engine', 'ejs');
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -70,7 +69,7 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
     });
 
     const browser = await puppeteer.launch({
-      executablePath: executablePath(),
+      executablePath: chromeLambda.executablePath,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
       headless: true,
     });
