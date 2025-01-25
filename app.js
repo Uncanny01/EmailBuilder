@@ -2,8 +2,9 @@ import express from "express"
 import cors from "cors"
 import path from "path"
 import fileUpload from "express-fileupload"
-import puppeteer from "puppeteer"
-import { executablePath } from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import { executablePath } from 'chrome-aws-lambda';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import ejs from "ejs"
 import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
@@ -20,7 +21,7 @@ app.use(cors({
   methods: ["GET", "POST"],
   credentials: true,
 }));
-
+puppeteer.use(StealthPlugin());
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
