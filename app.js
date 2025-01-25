@@ -3,6 +3,7 @@ import cors from "cors"
 import path from "path"
 import fileUpload from "express-fileupload"
 import puppeteer from "puppeteer"
+import { executablePath } from 'puppeteer';
 import ejs from "ejs"
 import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
@@ -67,6 +68,7 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
     });
 
     const browser = await puppeteer.launch({
+      executablePath: executablePath(),
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
       headless: true,
     });
