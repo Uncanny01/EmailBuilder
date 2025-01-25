@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import path from "path"
 import fileUpload from "express-fileupload"
-import puppeteer from "puppeteer-core"
+import puppeteer from "puppeteer"
 import ejs from "ejs"
 import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary"
@@ -16,7 +16,7 @@ dotenv.config()
 
 app.use(cors({
   origin: [process.env.FRONTEND_URL],
-  methods: ["GET", "POST", "DELETE", "PUT"],
+  methods: ["GET", "POST"],
   credentials: true,
 }));
 
@@ -66,7 +66,10 @@ app.post('/renderAndDownloadTemplate', async (req, res) => {
       footer
     });
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      headless: true,
+    });
     const page = await browser.newPage();
     await page.setContent(html);
 
